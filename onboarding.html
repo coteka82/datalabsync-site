@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Welcome to DataLabSync | Complete Your Profile</title>
+    <meta name="description" content="Help us build DataLabSync for you. Answer a few quick questions to shape the future of field execution tools.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Typography: Space Grotesk (display/headings) + Inter (body/UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           DESIGN TOKENS - Matching Landing Page
+           ============================================ */
+        :root {
+            /* Colors - Charcoal + Deep Blue palette */
+            --color-bg: #fafbfc;
+            --color-bg-alt: #f4f5f7;
+            --color-bg-dark: #0d1117;
+            --color-bg-card: #ffffff;
+            
+            --color-text: #1f2328;
+            --color-text-secondary: #57606a;
+            --color-text-muted: #8b949e;
+            --color-text-inverse: #ffffff;
+            
+            --color-primary: #0550ae;
+            --color-primary-hover: #033d8b;
+            --color-primary-light: #ddf4ff;
+            
+            --color-border: #d1d9e0;
+            --color-border-light: #e8ecf0;
+            
+            --color-success: #1a7f37;
+            --color-success-light: #dafbe1;
+            
+            --color-error: #cf222e;
+            --color-error-light: #ffebe9;
+            
+            --color-warning: #9a6700;
+            --color-warning-light: #fff8c5;
+            
+            /* Typography */
+            --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+            --font-body: "Inter", system-ui, -apple-system, sans-serif;
+            
+            /* Type Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.75rem;
+            --text-3xl: 2.25rem;
+            
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 24px;
+            --space-6: 32px;
+            --space-7: 48px;
+            --space-8: 64px;
+            
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(31, 35, 40, 0.04);
+            --shadow-md: 0 3px 6px rgba(31, 35, 40, 0.04), 0 2px 4px rgba(31, 35, 40, 0.02);
+            --shadow-lg: 0 8px 24px rgba(31, 35, 40, 0.08), 0 2px 8px rgba(31, 35, 40, 0.04);
+        }
+
+        /* ============================================
+           BASE RESET
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .onboarding-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-5);
+            min-height: 100vh;
+        }
+
+        .onboarding-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 560px;
+            padding: var(--space-7);
+            position: relative;
+        }
+
+        /* ============================================
+           HEADER / LOGO
+           ============================================ */
+        .onboarding-header {
+            text-align: center;
+            margin-bottom: var(--space-6);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            margin-bottom: var(--space-5);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* ============================================
+           PROGRESS BAR
+           ============================================ */
+        .progress-container {
+            margin-bottom: var(--space-6);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-2);
+        }
+
+        .progress-step {
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+        }
+
+        .progress-time {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--color-border-light);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        /* ============================================
+           SCREEN CONTENT
+           ============================================ */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--color-success-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-5);
+        }
+
+        .success-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--color-success);
+        }
+
+        /* Headings */
+        .screen-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--color-text);
+            text-align: center;
+            margin-bottom: var(--space-4);
+            letter-spacing: -0.02em;
+        }
+
+        .screen-subtitle {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            color: var(--color-text-secondary);
+            text-align: center;
+            line-height: 1.7;
+            margin-bottom: var(--space-6);
+        }
+
+        /* Question Styles */
+        .question-label {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--space-3);
+            letter-spacing: -0.02em;
+        }
+
+        .question-context {
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-5);
+            font-style: italic;
+        }
+
+        /* ============================================
+           FORM ELEMENTS
+           ============================================ */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .option-label:hover {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        .option-input:checked + .option-label {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light);
+            color: var(--color-text);
+        }
+
+        .option-input:focus + .option-label {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .option-input:checked + .option-label .option-radio {
+            border-color: var(--color-primary);
+        }
+
+        .option-input:checked + .option-label .option-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--color-primary);
+            border-radius: 50%;
+        }
+
+        /* Text Input */
+        .text-input {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-text);
+            transition: all 0.2s ease;
+            margin-top: var(--space-3);
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-light);
+        }
+
+        .text-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        /* Textarea */
+        .textarea-input {
+            width: 100%;
+            min-height: 120px;
+            padding: var(--space-4);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            color: var(--color-text);
+            resize: vertical;
+            transition: all 0.2s ease;
+            margin-bottom: var(--space-6);
+        }
+
+        .textarea-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-light);
+        }
+
+        /* ============================================
+           BUTTONS & CTA GROUP
+           ============================================ */
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            padding-bottom: 8px;
+        }
+
+        .cta-group .btn-primary {
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: var(--space-3);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-3);
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .btn-group-row {
+            display: flex;
+            gap: var(--space-3);
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .btn {
+            padding: var(--space-4) var(--space-5);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            min-height: 48px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--color-primary);
+            color: var(--color-text-inverse);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-border);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-bg-alt);
+            border-color: var(--color-text-muted);
+        }
+
+        .btn-secondary:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            font-size: var(--text-sm);
+            padding: var(--space-2) var(--space-3);
+            cursor: pointer;
+        }
+
+        .btn-text:hover {
+            color: var(--color-text-secondary);
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           SKIP LINK (Secondary Action)
+           ============================================ */
+        .skip-link {
+            display: block;
+            text-align: center;
+            margin-top: var(--space-3);
+        }
+
+        .skip-link a {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            text-decoration: none;
+            padding: var(--space-2) var(--space-3);
+            display: inline-block;
+            transition: color 0.15s ease;
+        }
+
+        .skip-link a:hover {
+            color: var(--color-text-secondary);
+        }
+
+        .skip-link a:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* ============================================
+           MULTI-SELECT SUPPORT
+           ============================================ */
+        .options-list.multi-select .option-label {
+            padding-left: var(--space-4);
+        }
+
+        .option-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .option-input:checked + .option-label .option-checkbox {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+        }
+
+        .option-input:checked + .option-label .option-checkbox::after {
+            content: '';
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            margin-bottom: 2px;
+        }
+
+        .multi-select-hint {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            margin-top: calc(var(--space-2) * -1);
+            margin-bottom: var(--space-4);
+        }
+
+        /* ============================================
+           FINAL SCREEN STYLES
+           ============================================ */
+        .next-steps {
+            background: var(--color-bg-alt);
+            border-radius: var(--radius-md);
+            padding: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .next-steps h4 {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            font-weight: 600;
+            margin-bottom: var(--space-3);
+        }
+
+        .next-steps ul {
+            list-style: none;
+        }
+
+        .next-steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .next-steps li svg {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .founder-signature {
+            text-align: center;
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .founder-signature p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .founder-signature .name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* ============================================
+           TIME BADGE
+           ============================================ */
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--color-bg-alt);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-5);
+        }
+
+        .time-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 600px) {
+            .onboarding-card {
+                padding: var(--space-5);
+            }
+
+            .screen-title {
+                font-size: var(--text-xl);
+            }
+
+            .question-label {
+                font-size: var(--text-lg);
+            }
+
+            .btn-group {
+                margin-top: 32px;
+            }
+
+            .btn-group-row {
+                max-width: 100%;
+            }
+
+            .cta-group .btn-primary {
+                max-width: 100%;
+            }
+        }
+
+        /* ============================================
+           LOADING & SUBMISSION STATES
+           ============================================ */
+        .btn-loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            top: 50%;
+            left: 50%;
+            margin-left: -9px;
+            margin-top: -9px;
+            border: 2px solid var(--color-text-inverse);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: var(--color-error-light);
+            border: 1px solid var(--color-error);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            margin-bottom: var(--space-5);
+            text-align: center;
+        }
+
+        .error-message.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .error-message p {
+            color: var(--color-error);
+            font-size: var(--text-sm);
+            margin: 0;
+        }
+
+        .error-message .error-title {
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+        }
+
+        .error-message .error-detail {
+            font-size: var(--text-xs);
+            opacity: 0.9;
+        }
+
+        .error-message button {
+            margin-top: var(--space-3);
+            background: var(--color-error);
+            color: white;
+            border: none;
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-sm);
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+
+        .error-message button:hover {
+            opacity: 0.9;
+        }
+
+        /* Offline Warning */
+        .offline-banner {
+            display: none;
+            background: var(--color-warning-light);
+            border: 1px solid var(--color-warning);
+            border-radius: var(--radius-md);
+            padding: var(--space-3) var(--space-4);
+            margin-bottom: var(--space-5);
+            text-align: center;
+            font-size: var(--text-sm);
+            color: var(--color-warning);
+        }
+
+        .offline-banner.visible {
+            display: block;
+        }
+
+        /* Submission Success Animation */
+        .submission-success {
+            text-align: center;
+            padding: var(--space-6) 0;
+        }
+
+        .submission-success .checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-5);
+        }
+
+        .submission-success .checkmark circle {
+            fill: var(--color-success-light);
+        }
+
+        .submission-success .checkmark path {
+            stroke: var(--color-success);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 24;
+            stroke-dashoffset: 24;
+            animation: checkmark-draw 0.4s ease-out 0.2s forwards;
+        }
+
+        @keyframes checkmark-draw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Field Validation */
+        .field-error {
+            border-color: var(--color-error) !important;
+            background: var(--color-error-light) !important;
+        }
+
+        .field-error-message {
+            color: var(--color-error);
+            font-size: var(--text-xs);
+            margin-top: var(--space-1);
+            display: none;
+        }
+
+        .field-error-message.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="onboarding-container">
+        <div class="onboarding-card">
+            <!-- Header with Logo -->
+            <div class="onboarding-header">
+                <a href="/" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 509 514" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M251.98 0C281.47 0.03 316.62 17.09 339.94 34.54C340.87 35.24 342.08 38.46 342.55 39.64C337.47 45 333.57 46.05 328.02 50.01C313.49 60.37 298.07 69.39 282.93 78.82C270.84 86.35 259.04 94.05 246.5 100.87C243.53 99.65 241.93 97.59 239.44 95.7C236.68 93.61 232.95 92.64 229.64 91.81C218.67 89.07 209.21 88.75 198.06 90.77C186.55 92.86 113.34 113.25 108.02 121.75C106.6 124.02 106.16 127.48 105.97 130.12C105.03 143.23 106 156.86 105.88 170.06L105.71 225.54C105.7 231.19 105.13 237.94 105.53 243.55C106.6 253.18 103.44 268.33 113.81 273.58C128.99 281.26 132.52 279.11 145.41 270C148.22 268.02 154.23 265.9 157.49 263.69C166.16 257.81 175.71 253.07 184.62 247.71L274.05 193.42C294.05 181.04 314.09 168.08 334.09 155.65C340.32 151.78 345.56 147.58 352.58 145.28C368.76 151.87 387.73 167.8 402.98 176.83C407.09 179.27 410.04 181.23 412.83 185.2C403.79 194.67 392.06 199.78 381.18 207.71C363.86 219.35 345.89 230.18 328.5 241.81C283.38 271.99 237.64 301.47 191.56 330.18C184.52 334.57 137.07 367.33 132.44 368.07C123.44 365.93 112.06 358.54 103.63 354.13C85.4398 344.62 68.3298 333.78 50.4498 323.5C35.4298 314.61 19.4898 307.24 5.18979 297.2C1.62979 294.9 2.10979 293.04 1.76979 289.32C1.10979 282.02 1.53979 274.6 1.24979 267.32C0.689785 252.99 0.669785 238.68 1.02979 224.34C1.22979 216.16 0.749785 208.12 0.529785 199.95C1.66979 180.79 1.64979 161.67 1.93979 142.52C1.98979 139.51 2.17979 136.49 2.32979 133.31C3.39979 111.29 1.78979 87.99 17.0298 70.03C25.9398 60.93 63.8498 49.29 77.2198 45.05L132.26 27.97C146.88 23.56 160.24 18.28 175.28 14.92C185.43 11.96 195.75 8.98 205.99 6.37C221.32 2.46 236.26 1.28 251.98 0.02V0Z" fill="#1151A3"/>
+                        <path d="M502.58 256.78C506.82 256.85 507.59 259.34 507.92 263.21C508.33 268.02 507.35 273.22 507.34 278.06C507.32 286.98 506.94 295.88 506.73 304.79C506.8 312.78 506.45 320.88 506.7 328.86C507.13 342.8 507.85 358.29 494.62 367.3C467.68 385.64 440.02 403.19 412.86 421.33L337.52 471.07C323.84 479.93 310.01 489.66 295.57 497.1C249.03 521.1 191.41 519.13 149.79 486.11C140.48 475.35 141.18 463.19 140.98 449.82C140.88 443.53 140.06 399.37 143.42 395.92C148.98 394.91 175.98 410.2 184.66 413.26C204.26 420.15 221.54 422.86 242.19 418.45C262.88 414.04 285.65 398.5 303.34 386.95C319.2 376.59 334.8 365.7 350.81 355.3L461.86 283.27C474.2 275.25 490.16 262.78 502.57 256.78H502.58Z" fill="#1151A3"/>
+                        <path d="M162.9 237.28C163.36 232.95 162.54 228.92 162.86 224.45C163.95 211.48 161.07 182.58 166.05 171.45C169.2 164.41 204.89 143.13 212.4 138.37L288.05 91.24L334.04 62.2401C343.4 56.4401 354.78 48.69 365.04 45.05C373.77 46.83 392.82 59.22 401.46 64.18C401.95 64.46 404.12 65.65 404.44 65.92C413.06 71.28 422.14 75.9601 430.9 81.0801C439.01 85.8201 446.81 91.04 454.97 95.71C467.01 102.6 480.26 109.35 491.18 117.88C495.34 121.13 499.33 125.32 501.96 129.92C504.3 134.03 505.88 138.83 506.5 143.52C507.35 149.92 507.36 211.6 505.68 217.05C504.96 219.39 503.98 220.75 501.79 221.84C496.93 221.64 472.49 203.1 467.17 199.45C454.91 191.03 442.56 184.45 429.9 176.78L379.24 145.62C374.25 142.59 369.19 139.26 364.35 136.12C358.93 132.6 354.36 129.21 347.71 132.07C346.1 132.76 344.01 133.4 342.49 134.33C329.37 142.36 316.49 150.99 303.38 159.06L239.17 198.4C215.41 213.27 192.29 228.3 167.09 241L162.88 237.27L162.9 237.28Z" fill="#1151A3"/>
+                        <path d="M453.49 207.13C459.44 211.38 492.15 232.93 494.08 236.64C495.01 238.44 495.05 240.7 494.34 242.59C493.52 244.77 491.57 246.42 489.79 247.83C483.51 252.78 476.71 257.19 470.13 261.72C462.21 267.17 454.36 272.89 446.3 278.11C434.03 286.05 421.44 293.46 409.28 301.57C370.74 327.27 332.2 352.87 292.55 376.84C281.72 383.39 269.38 392.56 258.23 397.73C233.95 409.01 215.65 411.05 189.89 401.63C182.29 398.85 176.32 394.75 169.23 391.09C164.26 388.52 158.52 386.86 153.86 383.79C152.62 382.97 151.36 381.87 150.87 380.42C150.35 378.87 150.75 377.13 151.48 375.72C153.59 371.69 158.42 368.63 162.08 366.1C183.69 351.16 206.08 337.42 228.21 323.28L289.93 283.26L365 233.99C384.92 220.84 407.15 205.72 428.07 193.92C430.48 192.56 448.39 203.94 451.29 206.18L453.49 207.14V207.13Z" fill="#1151A3"/>
+                        <path d="M1.60983 313.87C8.75983 313.59 10.6098 317.79 16.4098 321.1L108.27 374.76C115.42 378.94 123.87 381.35 128.33 388.51C129.43 405.94 126.45 425.57 127.63 443.38C128.09 450.26 129.17 461.26 125.45 467.13C117.76 471.2 112.93 465.71 105.78 462.28C97.6598 458.38 90.0598 452.51 82.3098 447.96C68.1598 439.67 54.0798 431.19 40.2498 422.36C31.4998 416.8 21.2098 412.03 13.3898 404.91C8.76984 400.76 5.40983 395.39 3.70983 389.42C-0.680165 374.14 -0.420165 356.85 0.649835 341.09C1.00983 335.81 -0.680165 317.92 1.59983 313.87H1.60983Z" fill="#1151A3"/>
+                    </svg>
+                    DataLabSync
+                </a>
+            </div>
+
+            <!-- Progress Bar (hidden on first and last screens) -->
+            <div class="progress-container" id="progressContainer" style="display: none;">
+                <div class="progress-info">
+                    <span class="progress-step" id="progressStep">Question 1 of 7</span>
+                    <span class="progress-time">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                        ~2 min left
+                    </span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Screen 0: Signup Success -->
+            <div class="screen active" id="screen-0">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <h1 class="screen-title">You're on the list.</h1>
+                <p class="screen-subtitle">Welcome to the DataLabSync early access program. We're building the field execution platform that diagnostics teams deserve — and your input shapes how we deliver it.</p>
+                <p class="screen-subtitle">A few quick questions will help us tailor your experience and prioritize the features that matter most to your work.</p>
+                
+                <div class="cta-group">
+                    <button class="btn btn-primary" onclick="nextScreen()">Continue to Questions</button>
+                    <div class="skip-link">
+                        <a href="/">Skip for now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 1: Quiz Intro -->
+            <div class="screen" id="screen-1">
+                <h1 class="screen-title">A few questions to personalize your experience.</h1>
+                <p class="screen-subtitle">DataLabSync is built in close partnership with FAS professionals. Your answers directly inform our product roadmap and help us deliver features that solve real problems.</p>
+                
+                <div class="time-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                    2–3 minutes • 7 questions
+                </div>
+                
+                <p class="screen-subtitle" style="font-size: var(--text-sm);">Your responses are confidential and used solely to improve the platform.</p>
+                
+                <div class="cta-group">
+                    <button class="btn btn-primary" onclick="startQuiz()">Get Started</button>
+                </div>
+            </div>
+
+            <!-- Screen 2: Question 1 - Role -->
+            <div class="screen" id="screen-2">
+                <p class="question-label">What best describes your current role?</p>
+                <p class="question-context">This helps us tailor the platform to your specific workflow needs.</p>
+                
+                <div class="options-list" id="q1-options">
+                    <div class="option-item">
+                        <input type="radio" name="role" id="role-1" value="Field Application Specialist (FAS)" class="option-input">
+                        <label for="role-1" class="option-label">
+                            <span class="option-radio"></span>
+                            Field Application Specialist (FAS)
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="role" id="role-2" value="FAS Manager / Team Lead" class="option-input">
+                        <label for="role-2" class="option-label">
+                            <span class="option-radio"></span>
+                            FAS Manager / Team Lead
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="role" id="role-3" value="Director of Field Operations" class="option-input">
+                        <label for="role-3" class="option-label">
+                            <span class="option-radio"></span>
+                            Director of Field Operations
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="role" id="role-4" value="VP / Head of Customer Support" class="option-input">
+                        <label for="role-4" class="option-label">
+                            <span class="option-radio"></span>
+                            VP / Head of Customer Support
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="role" id="role-5" value="Quality / Compliance Manager" class="option-input">
+                        <label for="role-5" class="option-label">
+                            <span class="option-radio"></span>
+                            Quality / Compliance Manager
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="role" id="role-6" value="Other" class="option-input" data-other="true">
+                        <label for="role-6" class="option-label">
+                            <span class="option-radio"></span>
+                            Other
+                        </label>
+                    </div>
+                </div>
+                <input type="text" id="role-other" class="text-input" placeholder="Please specify your role" style="display: none;">
+                
+                <div class="btn-group">
+                    <div class="btn-group-row">
+                        <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                        <button class="btn btn-primary" onclick="nextScreen()" id="btn-q1">Continue</button>
+                    </div>
+                    <div class="skip-link"><a href="#" onclick="skipQuestion(); return false;">Skip this question</a></div>
+                </div>
+            </div>
+
+            <!-- Screen 3: Question 2 - Current Tools -->
+            <div class="screen" id="screen-3">
+                <p class="question-label">How does your team currently track validation workflows and documentation?</p>
+                <p class="question-context">Understanding your current setup helps us ensure a smooth transition to DataLabSync.</p>
+                
+                <div class="options-list" id="q2-options">
+                    <div class="option-item">
+                        <input type="radio" name="tools" id="tools-1" value="Spreadsheets (Excel, Google Sheets)" class="option-input">
+                        <label for="tools-1" class="option-label">
+                            <span class="option-radio"></span>
+                            Spreadsheets (Excel, Google Sheets)
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="tools" id="tools-2" value="Shared drives / email attachments" class="option-input">
+                        <label for="tools-2" class="option-label">
+                            <span class="option-radio"></span>
+                            Shared drives / email attachments
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="tools" id="tools-3" value="General project management tools" class="option-input">
+                        <label for="tools-3" class="option-label">
+                            <span class="option-radio"></span>
+                            General project management tools (Asana, Monday, etc.)
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="tools" id="tools-4" value="Custom internal system" class="option-input">
+                        <label for="tools-4" class="option-label">
+                            <span class="option-radio"></span>
+                            Custom internal system
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="tools" id="tools-5" value="Paper-based / manual tracking" class="option-input">
+                        <label for="tools-5" class="option-label">
+                            <span class="option-radio"></span>
+                            Paper-based / manual tracking
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="tools" id="tools-6" value="No consistent system" class="option-input">
+                        <label for="tools-6" class="option-label">
+                            <span class="option-radio"></span>
+                            We don't have a consistent system
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <div class="btn-group-row">
+                        <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                        <button class="btn btn-primary" onclick="nextScreen()">Continue</button>
+                    </div>
+                    <div class="skip-link"><a href="#" onclick="skipQuestion(); return false;">Skip this question</a></div>
+                </div>
+            </div>
+
+            <!-- Screen 4: Question 3 - Biggest Frustration (Multi-Select) -->
+            <div class="screen" id="screen-4">
+                <p class="question-label">What are the most frustrating parts of managing field validation work today?</p>
+                <p class="question-context">This directly informs which capabilities we prioritize in your onboarding.</p>
+                <p class="multi-select-hint">Select all that apply</p>
+                
+                <div class="options-list multi-select" id="q3-options">
+                    <div class="option-item">
+                        <input type="checkbox" name="frustration" id="frust-1" value="Documentation takes too long" class="option-input">
+                        <label for="frust-1" class="option-label">
+                            <span class="option-checkbox"></span>
+                            Documentation takes too long
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="frustration" id="frust-2" value="Inconsistent processes across team" class="option-input">
+                        <label for="frust-2" class="option-label">
+                            <span class="option-checkbox"></span>
+                            Inconsistent processes across team members
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="frustration" id="frust-3" value="Hard to track progress" class="option-input">
+                        <label for="frust-3" class="option-label">
+                            <span class="option-checkbox"></span>
+                            Hard to track progress across sites/customers
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="frustration" id="frust-4" value="Compliance and audit prep is stressful" class="option-input">
+                        <label for="frust-4" class="option-label">
+                            <span class="option-checkbox"></span>
+                            Compliance and audit prep is stressful
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="frustration" id="frust-5" value="Knowledge loss when team members leave" class="option-input">
+                        <label for="frust-5" class="option-label">
+                            <span class="option-checkbox"></span>
+                            Knowledge loss when team members leave
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="frustration" id="frust-6" value="Lack of visibility for managers" class="option-input">
+                        <label for="frust-6" class="option-label">
+                            <span class="option-checkbox"></span>
+                            Lack of visibility for managers
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="frustration" id="frust-7" value="Training new team members takes too long" class="option-input">
+                        <label for="frust-7" class="option-label">
+                            <span class="option-checkbox"></span>
+                            Training new team members takes too long
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <div class="btn-group-row">
+                        <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                        <button class="btn btn-primary" onclick="nextScreen()">Continue</button>
+                    </div>
+                    <div class="skip-link"><a href="#" onclick="skipQuestion(); return false;">Skip this question</a></div>
+                </div>
+            </div>
+
+            <!-- Screen 5: Question 4 - Time Spent -->
+            <div class="screen" id="screen-5">
+                <p class="question-label">How much time does your team spend on documentation and admin work each week?</p>
+                <p class="question-context">This helps us quantify the efficiency gains DataLabSync can deliver for your team.</p>
+                
+                <div class="options-list" id="q4-options">
+                    <div class="option-item">
+                        <input type="radio" name="time" id="time-1" value="Less than 2 hours / week" class="option-input">
+                        <label for="time-1" class="option-label">
+                            <span class="option-radio"></span>
+                            Less than 2 hours / week
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="time" id="time-2" value="2–5 hours / week" class="option-input">
+                        <label for="time-2" class="option-label">
+                            <span class="option-radio"></span>
+                            2–5 hours / week
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="time" id="time-3" value="5–10 hours / week" class="option-input">
+                        <label for="time-3" class="option-label">
+                            <span class="option-radio"></span>
+                            5–10 hours / week
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="time" id="time-4" value="10–20 hours / week" class="option-input">
+                        <label for="time-4" class="option-label">
+                            <span class="option-radio"></span>
+                            10–20 hours / week
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="time" id="time-5" value="More than 20 hours / week" class="option-input">
+                        <label for="time-5" class="option-label">
+                            <span class="option-radio"></span>
+                            More than 20 hours / week
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="time" id="time-6" value="I'm not sure" class="option-input">
+                        <label for="time-6" class="option-label">
+                            <span class="option-radio"></span>
+                            I'm not sure
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <div class="btn-group-row">
+                        <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                        <button class="btn btn-primary" onclick="nextScreen()">Continue</button>
+                    </div>
+                    <div class="skip-link"><a href="#" onclick="skipQuestion(); return false;">Skip this question</a></div>
+                </div>
+            </div>
+
+            <!-- Screen 6: Question 5 - Engagement -->
+            <div class="screen" id="screen-6">
+                <p class="question-label">How would you like to move forward with DataLabSync?</p>
+                <p class="question-context">We'll tailor our communication to match your timeline and preferences.</p>
+                
+                <div class="options-list" id="q5-options">
+                    <div class="option-item">
+                        <input type="radio" name="engagement" id="engage-1" value="I'd love to see an early demo" class="option-input">
+                        <label for="engage-1" class="option-label">
+                            <span class="option-radio"></span>
+                            Schedule a personalized demo
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="engagement" id="engage-2" value="Send me updates, I'll explore when ready" class="option-input">
+                        <label for="engage-2" class="option-label">
+                            <span class="option-radio"></span>
+                            Keep me updated — I'll explore when ready
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="engagement" id="engage-3" value="I'd consider a pilot if timing is right" class="option-input">
+                        <label for="engage-3" class="option-label">
+                            <span class="option-radio"></span>
+                            Discuss a pilot program for my team
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="engagement" id="engage-4" value="I'm just curious for now" class="option-input">
+                        <label for="engage-4" class="option-label">
+                            <span class="option-radio"></span>
+                            Just exploring for now
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="engagement" id="engage-5" value="I'd want to involve my team or manager" class="option-input">
+                        <label for="engage-5" class="option-label">
+                            <span class="option-radio"></span>
+                            I'll need to involve my team or manager
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <div class="btn-group-row">
+                        <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                    <button class="btn btn-primary" onclick="nextScreen()">Continue</button>
+                    </div>
+                    <div class="skip-link"><a href="#" onclick="skipQuestion(); return false;">Skip this question</a></div>
+                </div>
+            </div>
+
+            <!-- Screen 7: Question 6 - Pricing -->
+            <div class="screen" id="screen-7">
+                <p class="question-label">What monthly investment would reflect the value of saving your team hours each week while reducing compliance risk?</p>
+                <p class="question-context">Your input helps us design pricing tiers that align with the value we deliver.</p>
+                
+                <div class="options-list" id="q6-options">
+                    <div class="option-item">
+                        <input type="radio" name="pricing" id="price-1" value="$0 — Free only" class="option-input">
+                        <label for="price-1" class="option-label">
+                            <span class="option-radio"></span>
+                            $0 — I'd only use a free tool
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pricing" id="price-2" value="$50–$150 / month" class="option-input">
+                        <label for="price-2" class="option-label">
+                            <span class="option-radio"></span>
+                            $50–$150 / month
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pricing" id="price-3" value="$150–$300 / month" class="option-input">
+                        <label for="price-3" class="option-label">
+                            <span class="option-radio"></span>
+                            $150–$300 / month
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pricing" id="price-4" value="$300–$750 / month" class="option-input">
+                        <label for="price-4" class="option-label">
+                            <span class="option-radio"></span>
+                            $300–$750 / month
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pricing" id="price-5" value="$750–$1,500 / month" class="option-input">
+                        <label for="price-5" class="option-label">
+                            <span class="option-radio"></span>
+                            $750–$1,500 / month
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pricing" id="price-6" value="$1,500+ / month (enterprise)" class="option-input">
+                        <label for="price-6" class="option-label">
+                            <span class="option-radio"></span>
+                            $1,500+ / month (enterprise)
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pricing" id="price-7" value="Not sure yet" class="option-input">
+                        <label for="price-7" class="option-label">
+                            <span class="option-radio"></span>
+                            Not sure yet — depends on what it does
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <div class="btn-group-row">
+                        <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                        <button class="btn btn-primary" onclick="nextScreen()">Continue</button>
+                    </div>
+                    <div class="skip-link"><a href="#" onclick="skipQuestion(); return false;">Skip this question</a></div>
+                </div>
+            </div>
+
+            <!-- Screen 8: Question 7 - Open Feedback -->
+            <div class="screen" id="screen-8">
+                <p class="question-label">Anything else we should know?</p>
+                <p class="question-context">Optional — but context about your specific situation helps us serve you better.</p>
+                
+                <textarea id="feedback" class="textarea-input" placeholder="Share any additional context about your workflows, team structure, or specific challenges..." maxlength="500"></textarea>
+                
+                <div class="btn-group">
+                    <div class="btn-group-row">
+                        <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                        <button class="btn btn-primary" onclick="submitQuiz()">Complete</button>
+                    </div>
+                    <div class="skip-link"><a href="#" onclick="submitQuiz(); return false;">Skip and finish</a></div>
+                </div>
+            </div>
+
+            <!-- Screen 9: Thank You -->
+            <div class="screen" id="screen-9">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <h1 class="screen-title">You're all set.</h1>
+                <p class="screen-subtitle" id="thankYouMessage">Your input has been recorded and will directly influence how we tailor DataLabSync to serve teams like yours.</p>
+                
+                <div class="next-steps">
+                    <h4>What happens next:</h4>
+                    <ul>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            Confirmation email arriving shortly
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            Product updates as we release new capabilities
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            Priority access when we open the next cohort
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="founder-signature">
+                    <p>Questions? Reply to any email — we respond personally.</p>
+                    <p class="name">— Gloire Rubambiza, Founder</p>
+                </div>
+                
+                <a href="/" class="btn btn-primary" style="margin-top: var(--space-6); width: 100%;">Return to Homepage</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // QUIZ STATE MANAGEMENT
+        // ============================================
+        let currentScreen = 0;
+        const totalQuestions = 7;
+        const quizStartScreen = 2;
+        const quizEndScreen = 8;
+        
+        const quizData = {
+            role: null,
+            roleOther: null,
+            tools: null,
+            frustration: null,
+            timeSpent: null,
+            engagement: null,
+            pricing: null,
+            feedback: null,
+            completedAt: null,
+            skippedQuestions: []
+        };
+
+        // Load saved state from localStorage
+        function loadState() {
+            const saved = localStorage.getItem('datalabsync_quiz');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                Object.assign(quizData, parsed);
+                // Restore radio selections
+                restoreSelections();
+            }
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            localStorage.setItem('datalabsync_quiz', JSON.stringify(quizData));
+        }
+
+        // Restore radio button and checkbox selections
+        function restoreSelections() {
+            if (quizData.role) {
+                const roleInput = document.querySelector(`input[name="role"][value="${quizData.role}"]`);
+                if (roleInput) roleInput.checked = true;
+            }
+            if (quizData.tools) {
+                const toolsInput = document.querySelector(`input[name="tools"][value="${quizData.tools}"]`);
+                if (toolsInput) toolsInput.checked = true;
+            }
+            if (quizData.frustration) {
+                // Handle multi-select (array) for frustration
+                const frustrations = Array.isArray(quizData.frustration) ? quizData.frustration : [quizData.frustration];
+                frustrations.forEach(value => {
+                    const frustInput = document.querySelector(`input[name="frustration"][value="${value}"]`);
+                    if (frustInput) frustInput.checked = true;
+                });
+            }
+            if (quizData.timeSpent) {
+                const timeInput = document.querySelector(`input[name="time"][value="${quizData.timeSpent}"]`);
+                if (timeInput) timeInput.checked = true;
+            }
+            if (quizData.engagement) {
+                const engageInput = document.querySelector(`input[name="engagement"][value="${quizData.engagement}"]`);
+                if (engageInput) engageInput.checked = true;
+            }
+            if (quizData.pricing) {
+                const priceInput = document.querySelector(`input[name="pricing"][value="${quizData.pricing}"]`);
+                if (priceInput) priceInput.checked = true;
+            }
+            if (quizData.feedback) {
+                document.getElementById('feedback').value = quizData.feedback;
+            }
+        }
+
+        // ============================================
+        // NAVIGATION
+        // ============================================
+        function showScreen(index) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            
+            // Show target screen
+            const screen = document.getElementById(`screen-${index}`);
+            if (screen) {
+                screen.classList.add('active');
+                currentScreen = index;
+            }
+
+            // Update progress bar
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function nextScreen() {
+            // Save current question data before moving
+            saveCurrentQuestion();
+            showScreen(currentScreen + 1);
+        }
+
+        function prevScreen() {
+            showScreen(currentScreen - 1);
+        }
+
+        function startQuiz() {
+            showScreen(2);
+        }
+
+        function skipQuestion() {
+            // Track skipped question
+            const questionNum = currentScreen - quizStartScreen + 1;
+            if (!quizData.skippedQuestions.includes(questionNum)) {
+                quizData.skippedQuestions.push(questionNum);
+            }
+            saveState();
+            nextScreen();
+        }
+
+        // ============================================
+        // PROGRESS BAR
+        // ============================================
+        function updateProgress() {
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressStep = document.getElementById('progressStep');
+
+            // Show progress only during quiz questions
+            if (currentScreen >= quizStartScreen && currentScreen <= quizEndScreen) {
+                progressContainer.style.display = 'block';
+                const questionNum = currentScreen - quizStartScreen + 1;
+                const progress = (questionNum / totalQuestions) * 100;
+                
+                progressFill.style.width = `${progress}%`;
+                progressStep.textContent = `Question ${questionNum} of ${totalQuestions}`;
+            } else {
+                progressContainer.style.display = 'none';
+            }
+        }
+
+        // ============================================
+        // DATA CAPTURE
+        // ============================================
+        function saveCurrentQuestion() {
+            switch(currentScreen) {
+                case 2: // Role
+                    const roleInput = document.querySelector('input[name="role"]:checked');
+                    if (roleInput) {
+                        quizData.role = roleInput.value;
+                        if (roleInput.value === 'Other') {
+                            quizData.roleOther = document.getElementById('role-other').value;
+                        }
+                    }
+                    break;
+                case 3: // Tools
+                    const toolsInput = document.querySelector('input[name="tools"]:checked');
+                    if (toolsInput) quizData.tools = toolsInput.value;
+                    break;
+                case 4: // Frustration (Multi-select)
+                    const frustInputs = document.querySelectorAll('input[name="frustration"]:checked');
+                    if (frustInputs.length > 0) {
+                        quizData.frustration = Array.from(frustInputs).map(input => input.value);
+                    }
+                    break;
+                case 5: // Time
+                    const timeInput = document.querySelector('input[name="time"]:checked');
+                    if (timeInput) quizData.timeSpent = timeInput.value;
+                    break;
+                case 6: // Engagement
+                    const engageInput = document.querySelector('input[name="engagement"]:checked');
+                    if (engageInput) quizData.engagement = engageInput.value;
+                    break;
+                case 7: // Pricing
+                    const priceInput = document.querySelector('input[name="pricing"]:checked');
+                    if (priceInput) quizData.pricing = priceInput.value;
+                    break;
+                case 8: // Feedback
+                    quizData.feedback = document.getElementById('feedback').value;
+                    break;
+            }
+            saveState();
+        }
+
+        // ============================================
+        // FORM SUBMISSION - PRODUCTION GRADE
+        // ============================================
+        
+        // Configuration
+        const API_CONFIG = {
+            endpoint: 'https://clawdbot-5b60.onrender.com/lead',
+            timeout: 15000, // 15 seconds
+            retries: 2,
+            retryDelay: 1000
+        };
+
+        // Submission state
+        let isSubmitting = false;
+        let submissionAttempts = 0;
+
+        /**
+         * Main quiz submission handler
+         * Collects all data and sends to API
+         */
+        async function submitQuiz() {
+            // Prevent double submission
+            if (isSubmitting) {
+                console.warn('[Submit] Already submitting, ignoring duplicate click');
+                return;
+            }
+
+            console.log('[Submit] Starting quiz submission...');
+            
+            // Save final question
+            saveCurrentQuestion();
+            quizData.completedAt = new Date().toISOString();
+            saveState();
+
+            // Get user email from localStorage (set on landing page)
+            const userEmail = localStorage.getItem('datalabsync_email') || '';
+            
+            // Prepare payload
+            const payload = buildPayload(userEmail);
+            console.log('[Submit] Payload prepared:', payload);
+
+            // Validate required fields
+            const validation = validatePayload(payload);
+            if (!validation.valid) {
+                console.error('[Submit] Validation failed:', validation.errors);
+                showError('Please complete the required fields', validation.errors.join(', '));
+                return;
+            }
+
+            // Check network status
+            if (!navigator.onLine) {
+                console.warn('[Submit] Device is offline');
+                showOfflineWarning();
+                saveForLater(payload);
+                return;
+            }
+
+            // Start submission
+            setLoadingState(true);
+            hideError();
+
+            try {
+                const result = await submitWithRetry(payload);
+                console.log('[Submit] Success:', result);
+                
+                // Clear saved state
+                localStorage.removeItem('datalabsync_quiz');
+                localStorage.removeItem('datalabsync_pending_submission');
+                
+                // Personalize and show thank you
+                personalizeThankYou();
+                showScreen(9);
+                
+            } catch (error) {
+                console.error('[Submit] Failed after retries:', error);
+                handleSubmissionError(error, payload);
+            } finally {
+                setLoadingState(false);
+            }
+        }
+
+        /**
+         * Build the API payload from quiz data
+         * Maps to Render backend: https://clawdbot-5b60.onrender.com/lead
+         */
+        function buildPayload(email) {
+            const frustrations = Array.isArray(quizData.frustration)
+                ? quizData.frustration
+                : [quizData.frustration].filter(Boolean);
+            const primaryPainPoint = frustrations.length > 0
+                ? frustrations[0]
+                : "Not specified";
+            return {
+                name: quizData.role || "Diagnostics Professional",
+                email: email || "unknown@datalabsync.com",
+                company: quizData.roleOther || "Not specified",
+                message: quizData.feedback || "Onboarding completed",
+                source: "quiz",
+                result: quizData.engagement || "Exploring options",
+                painPoint: primaryPainPoint,
+                metadata: {
+                    role: quizData.role,
+                    tools: quizData.tools,
+                    frustrations: frustrations,
+                    timeSpent: quizData.timeSpent,
+                    pricing: quizData.pricing,
+                    completedAt: quizData.completedAt,
+                    userAgent: navigator.userAgent
+                }
+            };
+        }
+
+        /**
+         * Validate the payload before submission
+         */
+        function validatePayload(payload) {
+            const errors = [];
+
+            // Email validation (if provided)
+            if (payload.email && payload.email !== 'not-provided@unknown.com') {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(payload.email)) {
+                    errors.push('Invalid email format');
+                }
+            }
+
+            // We're flexible - quiz can be submitted even with skipped questions
+            // But log a warning
+            if (quizData.skippedQuestions.length > 3) {
+                console.warn('[Validate] Many questions skipped:', quizData.skippedQuestions);
+            }
+
+            return {
+                valid: errors.length === 0,
+                errors
+            };
+        }
+
+        /**
+         * Submit with retry logic
+         */
+        async function submitWithRetry(payload, attempt = 1) {
+            submissionAttempts = attempt;
+            console.log(`[Submit] Attempt ${attempt} of ${API_CONFIG.retries + 1}`);
+
+            try {
+                const response = await fetchWithTimeout(
+                    API_CONFIG.endpoint,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    },
+                    API_CONFIG.timeout
+                );
+
+                // Check response status
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new APIError(
+                        errorData.message || `Server error: ${response.status}`,
+                        response.status,
+                        errorData
+                    );
+                }
+
+                const result = await response.json();
+                return result;
+
+            } catch (error) {
+                // Determine if we should retry
+                const shouldRetry = attempt <= API_CONFIG.retries && isRetryableError(error);
+                
+                if (shouldRetry) {
+                    console.log(`[Submit] Retrying in ${API_CONFIG.retryDelay}ms...`);
+                    await delay(API_CONFIG.retryDelay * attempt); // Exponential backoff
+                    return submitWithRetry(payload, attempt + 1);
+                }
+
+                throw error;
+            }
+        }
+
+        /**
+         * Fetch with timeout wrapper
+         */
+        function fetchWithTimeout(url, options, timeout) {
+            return Promise.race([
+                fetch(url, options),
+                new Promise((_, reject) => 
+                    setTimeout(() => reject(new TimeoutError('Request timed out')), timeout)
+                )
+            ]);
+        }
+
+        /**
+         * Custom error classes
+         */
+        class APIError extends Error {
+            constructor(message, status, data) {
+                super(message);
+                this.name = 'APIError';
+                this.status = status;
+                this.data = data;
+            }
+        }
+
+        class TimeoutError extends Error {
+            constructor(message) {
+                super(message);
+                this.name = 'TimeoutError';
+            }
+        }
+
+        /**
+         * Determine if an error is retryable
+         */
+        function isRetryableError(error) {
+            // Retry on network errors
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                return true;
+            }
+            // Retry on timeout
+            if (error.name === 'TimeoutError') {
+                return true;
+            }
+            // Retry on server errors (5xx)
+            if (error.name === 'APIError' && error.status >= 500) {
+                return true;
+            }
+            // Don't retry client errors (4xx)
+            return false;
+        }
+
+        /**
+         * Delay helper
+         */
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        /**
+         * Set loading state on submit button
+         */
+        function setLoadingState(loading) {
+            isSubmitting = loading;
+            
+            // Find submit button (on screen 8)
+            const submitBtns = document.querySelectorAll('#screen-8 .btn-primary');
+            submitBtns.forEach(btn => {
+                if (loading) {
+                    btn.classList.add('btn-loading');
+                    btn.disabled = true;
+                    btn.dataset.originalText = btn.textContent;
+                } else {
+                    btn.classList.remove('btn-loading');
+                    btn.disabled = false;
+                    if (btn.dataset.originalText) {
+                        btn.textContent = btn.dataset.originalText;
+                    }
+                }
+            });
+
+            // Also disable back button during submission
+            const backBtns = document.querySelectorAll('#screen-8 .btn-secondary');
+            backBtns.forEach(btn => {
+                btn.disabled = loading;
+            });
+        }
+
+        /**
+         * Show error message
+         */
+        function showError(title, detail = '') {
+            // Create error element if it doesn't exist
+            let errorEl = document.getElementById('submissionError');
+            if (!errorEl) {
+                errorEl = document.createElement('div');
+                errorEl.id = 'submissionError';
+                errorEl.className = 'error-message';
+                errorEl.innerHTML = `
+                    <p class="error-title"></p>
+                    <p class="error-detail"></p>
+                    <button onclick="retrySubmission()">Try Again</button>
+                `;
+                const screen8 = document.getElementById('screen-8');
+                screen8.insertBefore(errorEl, screen8.firstChild);
+            }
+
+            errorEl.querySelector('.error-title').textContent = title;
+            errorEl.querySelector('.error-detail').textContent = detail;
+            errorEl.classList.add('visible');
+        }
+
+        /**
+         * Hide error message
+         */
+        function hideError() {
+            const errorEl = document.getElementById('submissionError');
+            if (errorEl) {
+                errorEl.classList.remove('visible');
+            }
+        }
+
+        /**
+         * Show offline warning
+         */
+        function showOfflineWarning() {
+            let offlineEl = document.getElementById('offlineBanner');
+            if (!offlineEl) {
+                offlineEl = document.createElement('div');
+                offlineEl.id = 'offlineBanner';
+                offlineEl.className = 'offline-banner';
+                offlineEl.textContent = 'You appear to be offline. Your response has been saved and will be submitted when you reconnect.';
+                const screen8 = document.getElementById('screen-8');
+                screen8.insertBefore(offlineEl, screen8.firstChild);
+            }
+            offlineEl.classList.add('visible');
+        }
+
+        /**
+         * Save submission for later (offline support)
+         */
+        function saveForLater(payload) {
+            localStorage.setItem('datalabsync_pending_submission', JSON.stringify({
+                payload,
+                savedAt: new Date().toISOString()
+            }));
+            console.log('[Submit] Saved for later submission');
+            
+            // Show thank you anyway - we'll submit when they come back
+            personalizeThankYou();
+            showScreen(9);
+        }
+
+        /**
+         * Handle submission errors with user-friendly messages
+         */
+        function handleSubmissionError(error, payload) {
+            let title = 'Unable to submit';
+            let detail = '';
+
+            if (error.name === 'TimeoutError') {
+                title = 'Request timed out';
+                detail = 'The server is taking too long to respond. Please try again.';
+            } else if (error.name === 'TypeError') {
+                title = 'Network error';
+                detail = 'Please check your internet connection and try again.';
+            } else if (error.name === 'APIError') {
+                if (error.status === 429) {
+                    title = 'Too many requests';
+                    detail = 'Please wait a moment before trying again.';
+                } else if (error.status >= 500) {
+                    title = 'Server error';
+                    detail = 'Our servers are having issues. Please try again shortly.';
+                } else {
+                    title = 'Submission failed';
+                    detail = error.message;
+                }
+            } else {
+                detail = 'An unexpected error occurred. Please try again.';
+            }
+
+            showError(title, detail);
+            
+            // Save for retry
+            localStorage.setItem('datalabsync_pending_submission', JSON.stringify({
+                payload,
+                savedAt: new Date().toISOString(),
+                lastError: { name: error.name, message: error.message }
+            }));
+        }
+
+        /**
+         * Retry submission (called from error UI)
+         */
+        function retrySubmission() {
+            console.log('[Submit] Retrying submission...');
+            submitQuiz();
+        }
+
+        /**
+         * Check for pending submissions on page load
+         */
+        function checkPendingSubmissions() {
+            const pending = localStorage.getItem('datalabsync_pending_submission');
+            if (pending && navigator.onLine) {
+                try {
+                    const { payload, savedAt } = JSON.parse(pending);
+                    const savedTime = new Date(savedAt);
+                    const hoursSinceSaved = (Date.now() - savedTime.getTime()) / (1000 * 60 * 60);
+                    
+                    // Only retry if saved within last 24 hours
+                    if (hoursSinceSaved < 24) {
+                        console.log('[Submit] Found pending submission, retrying...');
+                        submitWithRetry(payload)
+                            .then(() => {
+                                localStorage.removeItem('datalabsync_pending_submission');
+                                console.log('[Submit] Pending submission successful');
+                            })
+                            .catch(err => {
+                                console.error('[Submit] Pending submission failed:', err);
+                            });
+                    } else {
+                        localStorage.removeItem('datalabsync_pending_submission');
+                    }
+                } catch (e) {
+                    console.error('[Submit] Error processing pending submission:', e);
+                    localStorage.removeItem('datalabsync_pending_submission');
+                }
+            }
+        }
+
+        // Listen for online event to retry pending submissions
+        window.addEventListener('online', () => {
+            console.log('[Network] Back online');
+            const offlineEl = document.getElementById('offlineBanner');
+            if (offlineEl) {
+                offlineEl.classList.remove('visible');
+            }
+            checkPendingSubmissions();
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('[Network] Gone offline');
+        });
+
+        function personalizeThankYou() {
+            const messageEl = document.getElementById('thankYouMessage');
+            const roleMessages = {
+                'Field Application Specialist (FAS)': 'Your frontline perspective ensures DataLabSync delivers practical value where it matters most — in the field.',
+                'FAS Manager / Team Lead': 'Your leadership insights help us build the visibility and coordination tools your team needs to perform at its best.',
+                'Director of Field Operations': 'Your operational perspective ensures DataLabSync delivers measurable impact across your entire field organization.',
+                'VP / Head of Customer Support': 'Your strategic input helps us align DataLabSync with the business outcomes that matter to your organization.',
+                'Quality / Compliance Manager': 'Your compliance expertise ensures DataLabSync meets the rigorous standards that regulated environments demand.'
+            };
+
+            if (quizData.role && roleMessages[quizData.role]) {
+                messageEl.textContent = roleMessages[quizData.role];
+            }
+        }
+
+        // ============================================
+        // OTHER FIELD TOGGLE
+        // ============================================
+        document.querySelectorAll('input[data-other="true"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const otherField = document.getElementById('role-other');
+                otherField.style.display = this.checked ? 'block' : 'none';
+                if (this.checked) {
+                    otherField.focus();
+                }
+            });
+        });
+
+        // Hide other field when different option selected
+        document.querySelectorAll('input[name="role"]').forEach(input => {
+            input.addEventListener('change', function() {
+                if (!this.dataset.other) {
+                    document.getElementById('role-other').style.display = 'none';
+                }
+            });
+        });
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Init] DataLabSync Onboarding loaded');
+            
+            // Load saved quiz state
+            loadState();
+            updateProgress();
+            
+            // Check for pending submissions (offline recovery)
+            checkPendingSubmissions();
+            
+            // Log environment info
+            console.log('[Init] Online:', navigator.onLine);
+            console.log('[Init] User email:', localStorage.getItem('datalabsync_email') || 'not set');
+        });
+    </script>
+</body>
+</html>
