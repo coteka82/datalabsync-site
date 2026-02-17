@@ -1813,6 +1813,55 @@
         /**
          * Check for pending submissions on page load
          */
+        /**
+ * Submit with retry logic
+ */
+async function submitWithRetry(payload) {
+    submissionAttempts = 0;
+
+    while (submissionAttempts <= API_CONFIG.retries) {
+        try {
+            submissionAttempts++;
+
+            console.log(`[Submit] Attempt ${submissionAttempts} to:`, API_CONFIG.endpoint);
+
+            const response = await fetchWithTimeout(
+                API_CONFIG.endpoint,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                },
+                API_CONFIG.timeout
+            );
+
+            if (!response.ok) {
+                const errorData = await response.text();
+                throw new APIError(
+                    `API returned ${response.status}`,
+                    response.status,
+                    errorData
+                );
+            }
+
+            return await response.json();
+
+        } catch (error) {
+            console.error(`[Submit] Attempt ${submissionAttempts} failed:`, error);
+
+            if (
+                submissionAttempts > API_CONFIG.retries ||
+                !isRetryableError(error)
+            ) {
+                throw error;
+            }
+
+            await delay(API_CONFIG.retryDelay);
+        }
+    }
+}
         function checkPendingSubmissions() {
             const pending = localStorage.getItem('datalabsync_pending_submission');
             if (pending && navigator.onLine) {
