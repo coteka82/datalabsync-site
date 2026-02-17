@@ -1626,7 +1626,160 @@
         async function submitWithRetry(payload, attempt = 1) {
             submissionAttempts = attempt;
             console.log(`[Submit] Attempt ${attempt} of ${API_CONFIG.retries + 1}`);
+<script>
+    // ============================================
+    // QUIZ STATE MANAGEMENT
+    // ============================================
+    let currentScreen = 0;
+    const totalQuestions = 7;
+    const quizStartScreen = 2;
+    const quizEndScreen = 8;
+    
+    const quizData = {
+        role: null,
+        roleOther: null,
+        tools: null,
+        frustration: null,
+        timeSpent: null,
+        engagement: null,
+        pricing: null,
+        feedback: null,
+        completedAt: null,
+        skippedQuestions: []
+    };
 
+    // ============================================
+    // CONFIG
+    // ============================================
+    const API_CONFIG = {
+        endpoint: 'https://clawdbot-5b60.onrender.com/lead',
+        timeout: 15000,
+        retries: 2,
+        retryDelay: 1000
+    };
+
+    let isSubmitting = false;
+    let submissionAttempts = 0;
+
+    // ============================================
+    // SUBMIT QUIZ
+    // ============================================
+    async function submitQuiz() {
+        if (isSubmitting) return;
+
+        saveCurrentQuestion();
+        quizData.completedAt = new Date().toISOString();
+
+        const userEmail = localStorage.getItem('datalabsync_email') || '';
+        const payload = buildPayload(userEmail);
+
+        console.log('[Submit] Final Payload:', payload);
+
+        setLoadingState(true);
+
+        try {
+            const result = await submitWithRetry(payload);
+            console.log('[Submit] Success:', result);
+            showScreen(9);
+        } catch (error) {
+            console.error('[Submit] Failed:', error);
+        } finally {
+            setLoadingState(false);
+        }
+    }
+
+    // ============================================
+    // RETRY + FETCH
+    // ============================================
+    async function submitWithRetry(payload, attempt = 1) {
+        submissionAttempts = attempt;
+
+        try {
+
+            // 🔥 DEBUG LINE INSERTED HERE
+            console.log("Posting to:", API_CONFIG.endpoint);
+
+            const response = await fetchWithTimeout(
+                API_CONFIG.endpoint,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                },
+                API_CONFIG.timeout
+            );
+
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+
+            return await response.json();
+
+        } catch (error) {
+
+            const shouldRetry =
+                attempt <= API_CONFIG.retries &&
+                (error.message.includes('fetch') || error.message.includes('timeout'));
+
+            if (shouldRetry) {
+                await delay(API_CONFIG.retryDelay * attempt);
+                return submitWithRetry(payload, attempt + 1);
+            }
+
+            throw error;
+        }
+    }
+
+    function fetchWithTimeout(url, options, timeout) {
+        return Promise.race([
+            fetch(url, options),
+            new Promise((_, reject) =>
+                setTimeout(() => reject(new Error('timeout')), timeout)
+            )
+        ]);
+    }
+
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // ============================================
+    // BUILD PAYLOAD
+    // ============================================
+    function buildPayload(email) {
+        return {
+            name: quizData.role || "Diagnostics Professional",
+            email: email || "unknown@datalabsync.com",
+            company: quizData.roleOther || "Not specified",
+            message: quizData.feedback || "Onboarding completed",
+            source: "quiz",
+            result: quizData.engagement || "Exploring options",
+            painPoint: quizData.frustration?.[0] || "Not specified",
+            metadata: {
+                role: quizData.role,
+                tools: quizData.tools,
+                frustrations: quizData.frustration,
+                timeSpent: quizData.timeSpent,
+                pricing: quizData.pricing,
+                completedAt: quizData.completedAt,
+                userAgent: navigator.userAgent
+            }
+        };
+    }
+
+    function setLoadingState(loading) {
+        isSubmitting = loading;
+        const btn = document.querySelector('#screen-8 .btn-primary');
+        if (!btn) return;
+
+        btn.disabled = loading;
+        btn.textContent = loading ? "Submitting..." : "Complete";
+    }
+</script>
+    
             try {
                 const response = await fetchWithTimeout(
                     API_CONFIG.endpoint,
