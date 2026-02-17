@@ -1530,15 +1530,7 @@
                 showError('Please complete the required fields', validation.errors.join(', '));
                 return;
             }
-
-            // Check network status
-            if (!navigator.onLine) {
-                console.warn('[Submit] Device is offline');
-                showOfflineWarning();
-                saveForLater(payload);
-                return;
-            }
-
+            
             // Start submission
             setLoadingState(true);
             hideError();
