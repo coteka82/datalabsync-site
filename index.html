@@ -2104,32 +2104,19 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-       <script>
-           
-  // ============================
+<script>
+  // ====================================
   // EMAIL VALIDATION
-  // ============================
+  // ====================================
 
   function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   }
 
-  function isWorkEmail(email) {
-    const personalDomains = [
-      "gmail.com",
-      "yahoo.com",
-      "hotmail.com",
-      "outlook.com",
-      "aol.com"
-    ];
-
-    const domain = email.split("@")[1]?.toLowerCase();
-    return domain && !personalDomains.includes(domain);
-  }
-  // ============================
-  // API SUBMISSION (SECURE)
-  // ============================
+  // ====================================
+  // API SUBMISSION (SECURE BACKEND)
+  // ====================================
 
   async function submitToAPI(email) {
     try {
@@ -2155,9 +2142,9 @@
     }
   }
 
-  // ============================
+  // ====================================
   // FORM HANDLER
-  // ============================
+  // ====================================
 
   document.addEventListener("DOMContentLoaded", function () {
 
@@ -2175,7 +2162,7 @@
 
       const email = emailInput.value.trim();
 
-      // Reset messages
+      // Reset UI
       successMessage.style.display = "none";
       errorMessage.style.display = "none";
 
@@ -2194,6 +2181,7 @@
       submitBtn.textContent = "Request Early Access";
 
       if (result.success) {
+        successMessage.textContent = "You're on the waitlist!";
         successMessage.style.display = "block";
         form.reset();
       } else {
