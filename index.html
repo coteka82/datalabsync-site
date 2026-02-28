@@ -2104,105 +2104,112 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // ============================================
-        // EMAIL VALIDATION
-        // ============================================
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
+       <script>
+           
+  // ============================
+  // EMAIL VALIDATION
+  // ============================
 
-        function isWorkEmail(email) {
-            const personalDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'icloud.com', 'mail.com'];
-            const domain = email.split('@')[1]?.toLowerCase();
-            return domain && !personalDomains.includes(domain);
-        }
+  function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
 
-        // ============================================
-        // FIRESTORE SUBMISSION
-        // ============================================
-        async function submitToFirestore(email) {
-            try {
-                const docRef = await addDoc(collection(db, 'waitlist'), {
-                    email: email.toLowerCase().trim(),
-                    createdAt: serverTimestamp(),
-                    source: window.location.pathname,
-                    userAgent: navigator.userAgent,
-                    referrer: document.referrer || 'direct'
-                });
-                console.log('Waitlist signup saved with ID:', docRef.id);
-                return { success: true, id: docRef.id };
-            } catch (error) {
-                console.error('Error adding to waitlist:', error);
-                return { success: false, error: error.message };
-            }
-        }
+  function isWorkEmail(email) {
+    const personalDomains = [
+      "gmail.com",
+      "yahoo.com",
+      "hotmail.com",
+      "outlook.com",
+      "aol.com"
+    ];
 
-        // ============================================
-        // FORM HANDLER
-        // ============================================
-        function handleFormSubmit(formId, successId) {
-            const form = document.getElementById(formId);
-            const success = document.getElementById(successId);
-            
-            if (!form) return;
+    const domain = email.split("@")[1]?.toLowerCase();
+    return domain && !personalDomains.includes(domain);
+  }
+  // ============================
+  // API SUBMISSION (SECURE)
+  // ============================
 
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const emailInput = form.querySelector('input[type="email"]');
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const email = emailInput.value.trim();
+  async function submitToAPI(email) {
+    try {
+      const response = await fetch("https://clawbot-5b60.onrender.com/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
 
-                // Validation
-                if (!email) {
-                    showFormError(form, 'Please enter your email address.');
-                    return;
-                }
+      const data = await response.json();
 
-                if (!isValidEmail(email)) {
-                    showFormError(form, 'Please enter a valid email address.');
-                    return;
-                }
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit");
+      }
 
-                // Optional: Warn about personal emails (but still allow)
-                if (!isWorkEmail(email)) {
-                    console.log('Personal email submitted:', email);
-                }
+      return { success: true };
 
-                // Disable button and show loading state
-                const originalText = submitBtn.textContent;
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Submitting...';
-                clearFormError(form);
+    } catch (error) {
+      console.error("API submission error:", error);
+      return { success: false, error: error.message };
+    }
+  }
 
-                try {
-                    // Submit to Firestore
-                    const result = await submitToFirestore(email);
+  // ============================
+  // FORM HANDLER
+  // ============================
 
-                    if (result.success) {
-                        // Store email for onboarding personalization
-                        localStorage.setItem('datalabsync_email', email);
-                        localStorage.setItem('datalabsync_signup_id', result.id);
-                        
-                        // Redirect to onboarding flow
-                        window.location.href = '/onboarding.html';
-                    } else {
-                        throw new Error(result.error || 'Failed to save to waitlist');
-                    }
-                } catch (error) {
-                    console.error('Form submission error:', error);
-                    showFormError(form, 'Something went wrong. Please try again.');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                }
-            });
-        }
+  document.addEventListener("DOMContentLoaded", function () {
 
-        // ============================================
-        // ERROR HANDLING UI
-        // ============================================
-        function showFormError(form, message) {
+    const form = document.getElementById("waitlist-form");
+    const successMessage = document.getElementById("success-message");
+    const errorMessage = document.getElementById("error-message");
+
+    if (!form) return;
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const emailInput = form.querySelector('input[type="email"]');
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      const email = emailInput.value.trim();
+
+      // Reset messages
+      successMessage.style.display = "none";
+      errorMessage.style.display = "none";
+
+      if (!isValidEmail(email)) {
+        errorMessage.textContent = "Please enter a valid email address.";
+        errorMessage.style.display = "block";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const result = await submitToAPI(email);
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Request Early Access";
+
+      if (result.success) {
+        successMessage.style.display = "block";
+        form.reset();
+      } else {
+        errorMessage.textContent = result.error || "Something went wrong. Please try again.";
+        errorMessage.style.display = "block";
+      }
+    });
+  });
+</script>
+    
+
+    // ============================================
+    // ERROR HANDLING UI
+    // ============================================
+        
+    function showFormError(form, message) {
             clearFormError(form);
             const errorDiv = document.createElement('div');
             errorDiv.className = 'form-error';
